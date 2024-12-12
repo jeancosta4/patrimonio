@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Cadastro de Patrimônio</h2>
+<form method="POST" action="{{ url_for('register_patrimonio') }}">
+    <label for="numero_patrimonio">Número do Patrimônio:</label>
+    <input type="text" name="numero_patrimonio" required>
+    <label for="descricao">Descrição:</label>
+    <textarea name="descricao" required></textarea>
+    <label for="local">Local:</label>
+    <input type="text" name="local" required>
+    <label for="condicao">Condição:</label>
+    <input type="text" name="condicao" required>
+    <button type="submit">Cadastrar</button>
+</form>
+
+<!-- Botões adicionais -->
+<div style="margin-top: 20px;">
+    <a href="{{ url_for('report') }}">
+        <button type="button">Ver Relatório</button>
+    </a>
+    <a href="{{ url_for('logout') }}">
+        <button type="button">Sair</button>
+    </a>
+</div>
+{% endblock %}

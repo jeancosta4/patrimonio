@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório de Patrimônios</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script>
+        // Função para filtrar a tabela com base no input de busca
+        function searchTable() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toLowerCase();
+            const table = document.getElementById('reportTable');
+            const rows = table.getElementsByTagName('tr');
+
+            for (let i = 1; i < rows.length; i++) { // Ignora o cabeçalho
+                const cells = rows[i].getElementsByTagName('td');
+                let match = false;
+
+                for (let j = 0; j < cells.length; j++) { // Verifica todas as células da linha
+                    const cellText = cells[j].textContent || cells[j].innerText;
+                    if (cellText.toLowerCase().includes(filter)) {
+                        match = true;
+                        break;
+                    }
+                }
+
+                // Exibe a linha se houver correspondência, caso contrário, oculta
+                rows[i].style.display = match ? '' : 'none';
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Relatório de Patrimônios</h1>
+    </header>
+    <main>
+        <input
+            type="text"
+            id="searchInput"
+            onkeyup="searchTable()"
+            placeholder="Digite para buscar..."
+            style="margin-bottom: 10px; width: 100%; padding: 8px;"
+        >
+        <button onclick="window.print()">Imprimir Relatório</button>
+        <table id="reportTable" border="1" style="width: 70%;">
+            <thead>
+                <tr>
+                    
+                    <th>Referência</th>
+                    <th>Num. Patrimônio</th>
+                    <th>Descrição</th>
+                    <th>Local</th>
+                    <th>Condição</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr>
+                    
+                    <td>{{ item['ref'] }}</td>
+                    <td>{{ item['numero_patrimonio'] }}</td>
+                    <td>{{ item['descricao'] }}</td>
+                    <td>{{ item['local'] }}</td>
+                    <td>{{ item['condicao'] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div style="margin-top: 20px;">
+            <a href="{{ url_for('register_patrimonio') }}">
+            <button type="button">Voltar</button>
+            </a>
+        
+        </div>
+    </main>
+</body>
+</html>
