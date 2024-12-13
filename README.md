@@ -30,7 +30,7 @@ Antes de começar, certifique-se de que os seguintes requisitos estejam atendido
     cd nome-do-repositorio
 ```
 
-3. nstalando o Ambiente
+3. Instalando o Ambiente
 
 Configurando o Ambiente Virtual (Recomendado)
 Crie um ambiente virtual:
